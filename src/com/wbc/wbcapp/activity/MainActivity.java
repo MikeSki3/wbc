@@ -1,4 +1,6 @@
-package com.wbc.wbc;
+package com.wbc.wbcapp.activity;
+
+import com.wbc.wbc.R;
 
 import android.os.Bundle;
 import android.app.Activity;
