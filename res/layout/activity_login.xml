@@ -36,7 +36,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="74dp"
-        android:text="WBC"
+        android:text="WBC \nConstruction"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button

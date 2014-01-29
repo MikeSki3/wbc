@@ -953,25 +953,26 @@ containing a value of this type.
         public static final int abs__textButton=0x7f040013;
         public static final int abs__title=0x7f04001b;
         public static final int abs__up=0x7f04000b;
-        public static final int action_forgot_password=0x7f04003a;
-        public static final int action_settings=0x7f040039;
-        public static final int content_list=0x7f040037;
+        public static final int action_forgot_password=0x7f04003b;
+        public static final int action_settings=0x7f04003a;
+        public static final int content_list=0x7f040038;
         public static final int disableHome=0x7f040009;
-        public static final int documentTitle=0x7f040038;
+        public static final int documentTitle=0x7f040039;
+        public static final int document_view=0x7f040033;
         public static final int edit_query=0x7f040026;
         public static final int homeAsUp=0x7f040006;
         public static final int imageView1=0x7f040032;
         public static final int listMode=0x7f040002;
-        public static final int loginButton=0x7f040036;
+        public static final int loginButton=0x7f040037;
         public static final int normal=0x7f040001;
-        public static final int password=0x7f040034;
+        public static final int password=0x7f040035;
         public static final int showCustom=0x7f040008;
         public static final int showHome=0x7f040005;
         public static final int showTitle=0x7f040007;
         public static final int tabMode=0x7f040003;
         public static final int useLogo=0x7f040004;
-        public static final int username=0x7f040033;
-        public static final int wbcTitle=0x7f040035;
+        public static final int username=0x7f040034;
+        public static final int wbcTitle=0x7f040036;
         public static final int wrap_content=0x7f040000;
     }
     public static final class integer {
@@ -1097,7 +1098,6 @@ containing a value of this type.
          */
         public static final int AppBaseTheme=0x7f0a0059;
         /**  Application theme. 
- All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f0a005a;
         public static final int LoginFormContainer=0x7f0a005b;
