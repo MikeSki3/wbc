@@ -1,12 +1,16 @@
 package com.wbc.wbcapp.activity;
 
-import com.wbc.wbc.R;
-import com.wbc.wbc.R.layout;
-import com.wbc.wbc.R.menu;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
-import android.os.Bundle;
+import org.apache.poi.xslf.usermodel.XMLSlideShow;
+
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.Menu;
+
+import com.wbc.wbc.R;
 
 public class DocumentViewActivity extends Activity {
 
@@ -14,6 +18,16 @@ public class DocumentViewActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_document_view);
+		
+		try {
+			XMLSlideShow ppt = new XMLSlideShow(new FileInputStream("slideshow.pptx"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
