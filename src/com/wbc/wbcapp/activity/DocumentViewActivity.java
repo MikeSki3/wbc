@@ -1,5 +1,6 @@
 package com.wbc.wbcapp.activity;
 
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -9,6 +10,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.docx4j.openpackaging.exceptions.Docx4JException;
+import org.docx4j.openpackaging.io.LoadFromZipNG;
 import org.docx4j.openpackaging.packages.PresentationMLPackage;
 import org.docx4j.openpackaging.parts.Part;
 import org.docx4j.openpackaging.parts.PresentationML.SlidePart;
@@ -109,14 +111,17 @@ public class DocumentViewActivity extends Activity {
 			File inFile = new java.io.File(System.getProperty("user.dir") + "/slideshow.pptx");
 			boolean okay = inFile.exists();
 			
+		    InputStream is = getAssets().open("slideshow.pptx");
+		    final LoadFromZipNG loader = new LoadFromZipNG();
 			
-			PresentationMLPackage presentationMLPackage = 
-			(PresentationMLPackage)PresentationMLPackage.load(inFile);	
+		    PresentationMLPackage presentationMLPackage = (PresentationMLPackage)loader.get(is);
+//			PresentationMLPackage presentationMLPackage = 
+//			(PresentationMLPackage)PresentationMLPackage.load(inFile);	
 			//String inputfilepath = System.getProperty("user.dir") + "/sample-docs/pptx/pptx-basic.xml";
 //			String inputfilepath = System.getProperty("user.dir") + "/sample-docs/pptx/lines.pptx";
 
 	    	// Where to save images
-	    	SvgExporter.setImageDirPath(System.getProperty("user.dir") + "/slideshow.xhtml");	
+	    	SvgExporter.setImageDirPath(getCacheDir() + "/slideshow.xhtml");	
 
 			// TODO - render slides in document order!
 			Iterator partIterator = presentationMLPackage.getParts().getParts().entrySet().iterator();
@@ -168,7 +173,7 @@ public class DocumentViewActivity extends Activity {
 		 });
 
 		
-		documentView.loadUrl("file:///android_asset/slideshow.xhtml");
+		documentView.loadUrl(getCacheDir() + "/slideshow.xhtml");
 		
 		
 //		try {
