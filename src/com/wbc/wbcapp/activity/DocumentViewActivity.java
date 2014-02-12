@@ -1,16 +1,20 @@
 package com.wbc.wbcapp.activity;
 
 
+
+
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.Reader;
 import java.util.Iterator;
 import java.util.Map;
 
 import org.docx4j.openpackaging.exceptions.Docx4JException;
-import org.docx4j.openpackaging.io.LoadFromZipNG;
 import org.docx4j.openpackaging.packages.PresentationMLPackage;
 import org.docx4j.openpackaging.parts.Part;
 import org.docx4j.openpackaging.parts.PresentationML.SlidePart;
@@ -93,10 +97,17 @@ public class DocumentViewActivity extends Activity {
 //			int resourceId = getResources().getIdentifier("com.your.package:raw/somefile.txt");
 //			File f = new File(getResources().openRawResource(resourceId));
 			
+			
+			
 			 File f = new File(getCacheDir()+"/slideshow.pptx");
 			  if (!f.exists()) try {
 
-			    InputStream is = getAssets().open("slideshow.pptx");
+//			    InputStream is = getAssets().open("slideshow.pptx");
+				
+				  InputStream is = getAssets().open("slideshow.pptx");
+
+				  //Reader is = new BufferedReader(new InputStreamReader(raw, "UTF8"));
+				
 			    int size = is.available();
 			    byte[] buffer = new byte[size];
 			    is.read(buffer);
@@ -112,11 +123,10 @@ public class DocumentViewActivity extends Activity {
 			boolean okay = inFile.exists();
 			
 		    InputStream is = getAssets().open("slideshow.pptx");
-		    final LoadFromZipNG loader = new LoadFromZipNG();
+		    //final LoadFromZipNG loader = new LoadFromZipNG();
 			
-		    PresentationMLPackage presentationMLPackage = (PresentationMLPackage)loader.get(is);
-//			PresentationMLPackage presentationMLPackage = 
-//			(PresentationMLPackage)PresentationMLPackage.load(inFile);	
+//		    PresentationMLPackage presentationMLPackage = (PresentationMLPackage)loader.get(is);
+			PresentationMLPackage presentationMLPackage = (PresentationMLPackage) PresentationMLPackage.load(getAssets().open("slideshow.pptx"));
 			//String inputfilepath = System.getProperty("user.dir") + "/sample-docs/pptx/pptx-basic.xml";
 //			String inputfilepath = System.getProperty("user.dir") + "/sample-docs/pptx/lines.pptx";
 
