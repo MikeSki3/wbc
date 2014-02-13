@@ -183,7 +183,7 @@ public class DocumentViewActivity extends Activity {
 		 });
 
 		
-		documentView.loadUrl(getCacheDir() + "/slideshow.xhtml");
+		documentView.loadUrl("file:///android_asset/protection/Protection.html");
 		
 		
 //		try {
