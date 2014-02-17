@@ -8,24 +8,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
-//import org.docx4j.openpackaging.exceptions.Docx4JException;
-//import org.docx4j.openpackaging.packages.PresentationMLPackage;
-//import org.docx4j.openpackaging.parts.Part;
-//import org.docx4j.openpackaging.parts.PresentationML.SlidePart;
-//import org.pptx4j.convert.out.svginhtml.SvgExporter;
 
 import android.app.Activity;
-import android.content.res.AssetManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.Window;
@@ -36,6 +31,11 @@ import android.widget.Toast;
 
 import com.aspose.cloud.sdk.common.AsposeApp;
 import com.wbc.wbc.R;
+//import org.docx4j.openpackaging.exceptions.Docx4JException;
+//import org.docx4j.openpackaging.packages.PresentationMLPackage;
+//import org.docx4j.openpackaging.parts.Part;
+//import org.docx4j.openpackaging.parts.PresentationML.SlidePart;
+//import org.pptx4j.convert.out.svginhtml.SvgExporter;
 
 public class DocumentViewActivity extends Activity {
 
@@ -57,13 +57,11 @@ public class DocumentViewActivity extends Activity {
 		String signedURI = Sign(strURI, "11d55855-f6bd-4b84-8c79-e10be6931d25", "bcec854ec2a184f41483ae0ce68dcde0");
 		InputStream responseStream;
 		try {
-			responseStream = ProcessCommand(signedURI, "GET");
-			File outputPath = new File(getCacheDir() + "/Protection.html");
-			SaveStreamToFile(outputPath, responseStream);
-			responseStream.close();
-		} catch (IOException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
+			//responseStream = ProcessCommand(signedURI, "GET");
+			new GetDocumentFromServer().execute(signedURI, "GET", getCacheDir() + "/Protection.html");
+//			File outputPath = new File(getCacheDir() + "/Protection.html");
+//			SaveStreamToFile(outputPath, responseStream);
+//			responseStream.close();
 		} catch (Exception e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
@@ -217,6 +215,7 @@ public class DocumentViewActivity extends Activity {
 
 		documentView.loadUrl(getCacheDir() + "/Protection.html");
 		// "file:///android_asset/protection/Protection.html"
+		//getCacheDir() + "/Protection.html"
 
 		// try {
 		// XMLSlideShow ppt = new XMLSlideShow(new
@@ -253,7 +252,8 @@ public class DocumentViewActivity extends Activity {
 			SecretKeySpec signingKey = new SecretKeySpec(AppKey.getBytes(), "HMAC_SHA1_ALGORITHM");
 
 			// get an hmac_sha1 Mac instance and initialize with the signing key
-			Mac mac = Mac.getInstance("HMAC_SHA1_ALGORITHM");
+			Mac mac = Mac.getInstance("HmacSHA1");
+			//HMAC_SHA1_ALGORITHM
 			mac.init(signingKey);
 
 			// compute the hmac on input data bytes
@@ -273,21 +273,22 @@ public class DocumentViewActivity extends Activity {
 
 	}
 
-	public static InputStream ProcessCommand(String strURI, String strHttpCommand) throws Exception {
-
-		URL address = new URL(strURI);
-		HttpURLConnection httpCon = (HttpURLConnection) address.openConnection();
-		httpCon.setDoOutput(true);
-
-		httpCon.setRequestProperty("Content-Type", "application/json");
-		httpCon.setRequestProperty("Accept", "text/json");
-		httpCon.setRequestMethod(strHttpCommand);
-		if (strHttpCommand.equals("PUT") || strHttpCommand.equals("POST"))
-			httpCon.setFixedLengthStreamingMode(0);
-		String d = httpCon.getResponseMessage();
-		System.out.println(d);
-		return httpCon.getInputStream();
-	}
+//	public static InputStream ProcessCommand(String strURI, String strHttpCommand) throws Exception {
+//
+//
+////		URL address = new URL(strURI);
+////		HttpURLConnection httpCon = (HttpURLConnection) address.openConnection();
+////		httpCon.setDoOutput(true);
+////
+////		httpCon.setRequestProperty("Content-Type", "application/json");
+////		httpCon.setRequestProperty("Accept", "text/json");
+////		httpCon.setRequestMethod(strHttpCommand);
+////		if (strHttpCommand.equals("PUT") || strHttpCommand.equals("POST"))
+////			httpCon.setFixedLengthStreamingMode(0);
+////		String d = httpCon.getResponseMessage();
+////		System.out.println(d);
+////		return httpCon.getInputStream();
+//	}
 
 	public void SaveStreamToFile(File outputPath, InputStream inputStream) {
 		OutputStream outputStream = null;
@@ -335,4 +336,67 @@ public class DocumentViewActivity extends Activity {
 		return true;
 	}
 
+}
+
+class GetDocumentFromServer extends AsyncTask<String, Void, InputStream> {
+	
+	File outputPath;
+
+	@Override
+	protected InputStream doInBackground(String... args) {
+		InputStream result = null;
+		String strURI = args[0];
+		String strHttpCommand = args[1];
+		outputPath = new File(args[2]);
+		URL address;
+		try {
+			address = new URL(strURI);
+		
+		HttpURLConnection httpCon = (HttpURLConnection) address.openConnection();
+//		httpCon.setDoOutput(true);
+//
+//		httpCon.setRequestProperty("Content-Type", "application/json");
+//		httpCon.setRequestProperty("Accept", "text/json");
+//		httpCon.setRequestMethod(strHttpCommand);
+//		if (strHttpCommand.equals("PUT") || strHttpCommand.equals("POST"))
+//			httpCon.setFixedLengthStreamingMode(0);
+//		String d = httpCon.getResponseMessage();
+//		System.out.println(d);
+		result = httpCon.getInputStream();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+    protected void onPostExecute(InputStream inputStream) {
+        // TODO: check this.exception 
+        // TODO: do something with the feed
+		OutputStream outputStream = null;
+		try {
+			// read this file into InputStream
+
+			// write the inputStream to a FileOutputStream
+			outputStream = new FileOutputStream(outputPath);
+
+            int read = 0;
+            byte[] bytes = new byte[8192];
+
+            while ((read = inputStream.read(bytes)) != -1) {
+               outputStream.write(bytes, 0, read);
+            }
+
+            inputStream.close();
+            outputStream.flush();
+            outputStream.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+	
 }
