@@ -953,26 +953,25 @@ containing a value of this type.
         public static final int abs__textButton=0x7f050013;
         public static final int abs__title=0x7f05001b;
         public static final int abs__up=0x7f05000b;
-        public static final int action_forgot_password=0x7f05003b;
-        public static final int action_settings=0x7f05003a;
-        public static final int content_list=0x7f050038;
+        public static final int action_forgot_password=0x7f05003a;
+        public static final int action_settings=0x7f050039;
+        public static final int content_list=0x7f050037;
         public static final int disableHome=0x7f050009;
-        public static final int documentTitle=0x7f050039;
-        public static final int document_view=0x7f050033;
+        public static final int documentTitle=0x7f050038;
+        public static final int document_view=0x7f050032;
         public static final int edit_query=0x7f050026;
         public static final int homeAsUp=0x7f050006;
-        public static final int imageView1=0x7f050032;
         public static final int listMode=0x7f050002;
-        public static final int loginButton=0x7f050037;
+        public static final int loginButton=0x7f050035;
+        public static final int loginErr=0x7f050036;
         public static final int normal=0x7f050001;
-        public static final int password=0x7f050035;
         public static final int showCustom=0x7f050008;
         public static final int showHome=0x7f050005;
         public static final int showTitle=0x7f050007;
         public static final int tabMode=0x7f050003;
         public static final int useLogo=0x7f050004;
-        public static final int username=0x7f050034;
-        public static final int wbcTitle=0x7f050036;
+        public static final int username=0x7f050033;
+        public static final int wbcTitle=0x7f050034;
         public static final int wrap_content=0x7f050000;
     }
     public static final class integer {

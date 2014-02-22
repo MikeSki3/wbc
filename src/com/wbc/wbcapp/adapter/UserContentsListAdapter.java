@@ -11,11 +11,12 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.wbc.wbc.R;
+import com.wbc.wbcapp.model.UsersDocument;
 
 
-public class UserContentsListAdapter extends ArrayAdapter<String> {
+public class UserContentsListAdapter extends ArrayAdapter<UsersDocument> {
 	private final Context context;
-	private final ArrayList<String> values;
+	private final ArrayList<UsersDocument> values;
 	SharedPreferences settings;
 	SharedPreferences.Editor editor;
 	
@@ -25,10 +26,10 @@ public class UserContentsListAdapter extends ArrayAdapter<String> {
 		public TextView documentName;
 	}
 
-	public UserContentsListAdapter(Context context, ArrayList<String> values) {
-		super(context, R.layout.list_item_single_content, values);
+	public UserContentsListAdapter(Context context, ArrayList<UsersDocument> documents) {
+		super(context, R.layout.list_item_single_content, documents);
 		this.context = context;
-		this.values = values;
+		this.values = documents;
 	}
 
 	@Override
@@ -43,7 +44,7 @@ public class UserContentsListAdapter extends ArrayAdapter<String> {
 		}
 
 		final ViewHolder holder = (ViewHolder) rowView.getTag();
-		holder.documentName.setText(values.get(position));
+		holder.documentName.setText(values.get(position).getFile());
 		
 
 		return rowView;

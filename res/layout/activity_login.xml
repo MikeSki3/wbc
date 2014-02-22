@@ -17,18 +17,6 @@
         <requestFocus />
     </EditText>
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/username"
-        android:layout_alignLeft="@+id/username"
-        android:layout_alignRight="@+id/username"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:hint="Password" >
-    </EditText>
-
     <TextView
         android:id="@+id/wbcTitle"
         android:layout_width="wrap_content"
@@ -43,8 +31,15 @@
         android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/password"
+        android:layout_below="@+id/username"
         android:layout_centerHorizontal="true"
         android:text="Login" />
+
+    <TextView
+        android:id="@+id/loginErr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/loginButton"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
